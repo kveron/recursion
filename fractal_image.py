@@ -10,9 +10,6 @@ image = Image.new("RGB", (width, height))
 draw = ImageDraw.Draw(image)
 
 
-# draw.rectangle((0, 0, width - 1, height - 1), fill=ImageColor.getrgb("white"), outline=ImageColor.getrgb("grey"))
-
-
 def barnsley_fern(n, x1=500, y1=3700, angle=60, length=900, angle_for_each_side=3):
     # purple = "rgb("  # попытка сделать градиент, завершившаяся провалом
     # y = 0
@@ -31,16 +28,26 @@ def barnsley_fern(n, x1=500, y1=3700, angle=60, length=900, angle_for_each_side=
     y2 = y1 - int(math.sin(math.radians(angle)) * length)
     draw.line((x1, y1, x2, y2), ImageColor.getrgb("rgb(200,0,200)"))
     if n > 13:
-        barnsley_fern(n - 1, x1 + int(round(math.cos(math.radians(angle)) * (length * 0.6))),
-                      y1 - int(round(math.sin(math.radians(angle)) * (length * 0.6))), angle + 60,
+        barnsley_fern(n - 1, x_coordinate_for_next_fern(x1, angle, length, 0.6),
+                      y_coordinate_for_next_fern(y1, angle, length, 0.6), angle + 60,
                       int(round(length * 0.35)), 3)
-        barnsley_fern(n - 1, x1 + int(round(math.cos(math.radians(angle)) * (length * 0.2))),
-                      y1 - int(round(math.sin(math.radians(angle)) * (length * 0.2))), angle - 60,
+        barnsley_fern(n - 1, x_coordinate_for_next_fern(x1, angle, length, 0.2),
+                      y_coordinate_for_next_fern(y1, angle, length, 0.2), angle - 60,
                       int(round(length * 0.4)), -3)
     barnsley_fern(n - 1, x2, y2, angle - angle_for_each_side, int(round(length * 0.8)), angle_for_each_side)
 
 
-def draw_dragon(n, old=[1], new=[], x1=1700, y1=3200, angle=90, length=10):
+def x_coordinate_for_next_fern(x, angle, length, shift):
+    x = x + int(round(math.cos(math.radians(angle)) * (length * shift)))
+    return x
+
+
+def y_coordinate_for_next_fern(y, angle, length, shift):
+    y = y - int(round(math.sin(math.radians(angle)) * (length * shift)))
+    return y
+
+
+def draw_dragon(n, old=[1], x1=1700, y1=3200, angle=90, length=10):
     new = []
     for i in old:
         new.append(i)
