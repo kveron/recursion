@@ -1,3 +1,5 @@
+import unittest
+
 from simple_recursion import *
 from unittest import TestCase
 
@@ -74,3 +76,7 @@ class FromAToBTestCase(TestCase):
         actual_message = from_a_to_b(5, 0, [])
         expected_message = "a must be less than b"
         self.assertEqual(expected_message, actual_message)
+
+
+if __name__ == "__main__":
+    unittest.main
