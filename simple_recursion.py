@@ -1,7 +1,7 @@
-def fib(n):
+def find_fibonacci(n):
     if n in (1, 2):
         return 1
-    return fib(n - 1) + fib(n - 2)
+    return find_fibonacci(n - 1) + find_fibonacci(n - 2)
 
 
 def from_a_to_b(a, b, numbers=[]):
@@ -13,10 +13,10 @@ def from_a_to_b(a, b, numbers=[]):
     return numbers
 
 
-def maximum(list_of_numbers, max=0):
+def maximum(list_of_numbers, maxi=0):
     number = list_of_numbers.pop()
-    if max < number:
-        max = number
+    if maxi < number:
+        maxi = number
     if list_of_numbers:
-        max = maximum(list_of_numbers, max)
-    return max
+        maxi = maximum(list_of_numbers, maxi)
+    return maxi
